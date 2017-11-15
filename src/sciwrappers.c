@@ -55,6 +55,8 @@ sptr_t sci_send_message_internal (const gchar *file, guint line, ScintillaObject
 	status = scintilla_send_message(sci, SCI_GETSTATUS, 0, 0);
 	if (msg == SCI_GETSELECTIONS) {
 		g_warning("recieved SCI_GETSELECTIONS from %s:%u:", file, line);
+	} else if (msg == SCI_GETMULTIPLESELECTION) {
+		g_warning("recieved SCI_GETMULTIPLESELECTION from %s:%u:", file, line);
 	} else if (msg == SCI_GETCHARAT) {
 		g_warning("recieved SCI_GETCHARAT from %s:%u:", file, line);
 	} else if (msg == SCI_POSITIONFROMLINE) {
@@ -62,7 +64,8 @@ sptr_t sci_send_message_internal (const gchar *file, guint line, ScintillaObject
 	} else if (msg == SCI_GETLINEINDENTATION) {
 		g_warning("recieved SCI_GETLINEINDENTATION from %s:%u:", file, line);
 	} else {
-		g_warning("recieved %u from %s:%u: %d selections currently", msg, file, line, sci_get_selections(sci));
+		g_warning("recieved %u from %s:%u: %d selections currently, multiple selection: %s ", msg, file, line, sci_get_selections(sci), 
+		sci_get_multiple_selection(sci) ? "true" : "false");
 	}
 	if (status != 0)
 	{
