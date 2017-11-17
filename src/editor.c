@@ -319,10 +319,11 @@ static gboolean on_editor_button_press_event(GtkWidget *widget, GdkEventButton *
 			g_warning("%d selection(s) before", sci_get_selections(editor->sci));
 			sci_add_selection(editor->sci, editor_info.click_pos, editor_info.click_pos);
 			g_warning("%d selection(s) after", sci_get_selections(editor->sci));
+			return TRUE;
 		}
 		return document_check_disk_status(doc, FALSE);
 	}
-	
+
 
 	/* calls the edit popup menu in the editor */
 	if (event->button == 3)
